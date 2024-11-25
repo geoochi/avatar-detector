@@ -1,0 +1,7 @@
+#! /usr/bin/sh
+
+if [ -f app.pid ];
+then
+    sudo /home/ubuntu/micromamba/bin/uwsgi --stop app.pid
+    sudo rm app.pid
+fi

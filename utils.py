@@ -1,16 +1,16 @@
 import cv2
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import numpy as np
-from pathlib import Path
+# from pathlib import Path
 
 
-def imshow(img: np.ndarray) -> None:
-    plt.imshow(img[:, :, [2, 1, 0]])
-    plt.xticks([])
-    plt.yticks([])
-    plt.title(img.shape)
-    # plt.axis('off')
-    plt.show()
+# def imshow(img: np.ndarray) -> None:
+#     plt.imshow(img[:, :, [2, 1, 0]])
+#     plt.xticks([])
+#     plt.yticks([])
+#     plt.title(img.shape)
+#     # plt.axis('off')
+#     plt.show()
 
 
 def crop_to_square(img: np.ndarray) -> np.ndarray:
