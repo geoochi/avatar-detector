@@ -73,9 +73,9 @@ def find_avatar_template_matching(main_img, avatar_img):
     return result_img, max_val
 
 
-def find_avatar(avatar_path: str):
+def find_avatar(avatar_stem: str):
     # 使用示例
-    avatar = cv2.imread(avatar_path)
+    avatar = cv2.imread(f'input/{avatar_stem}.jpg')
     template = crop_to_square(avatar)[10:-10, 10:-10]
     confidences = np.zeros((50 * 134))
     for i in range(50):
@@ -87,20 +87,22 @@ def find_avatar(avatar_path: str):
 
     rank = np.argsort(-confidences)
     # plt.plot(confidences[rank], 'o')
-    fig = plt.figure(figsize=(30, 10))
-    for i in range(3):
-        ax = fig.add_subplot(1, 3, i + 1)
-        ax.set_title(f'No.{i + 1} confidence: {confidences[rank[i]]}')
-        row, col = int(rank[i] // 134), int(rank[i] % 134)
-        matched_img, _ = find_avatar_template_matching(
-            getImg(row, col, area_type='larger'), template
-        )
-        ax.imshow(matched_img[:, :, [2, 1, 0]])
-        ax.set_xticks([])
-        ax.set_yticks([])
-    plt.show()
 
-    choose_i = int(input('choose a number:')) - 1
+    # fig = plt.figure(figsize=(30, 10))
+    # for i in range(3):
+    #     ax = fig.add_subplot(1, 3, i + 1)
+    #     ax.set_title(f'No.{i + 1} confidence: {confidences[rank[i]]}')
+    #     row, col = int(rank[i] // 134), int(rank[i] % 134)
+    #     matched_img, _ = find_avatar_template_matching(
+    #         getImg(row, col, area_type='larger'), template
+    #     )
+    #     ax.imshow(matched_img[:, :, [2, 1, 0]])
+    #     ax.set_xticks([])
+    #     ax.set_yticks([])
+    # plt.show()
+
+    # choose_i = int(input('choose a number:')) - 1
+    choose_i = 0
     row, col = int(rank[choose_i] // 134), int(rank[choose_i] % 134)
 
     # 计算目标点的坐标
@@ -136,9 +138,8 @@ def find_avatar(avatar_path: str):
         tipLength=0.3,
     )
     # imshow(img_res)
-    avatar_stem = Path(avatar_path).stem
     cv2.imwrite(
-        f'./result_{avatar_stem}.jpg',
+        f'./output/{avatar_stem}.jpg',
         cv2.resize(
             img_res,
             (img_res.shape[1] // 10, img_res.shape[0] // 10),
