@@ -1,0 +1,10 @@
+.DS_Store
+__pycache__
+.vscode/
+
+*.png
+*.jpg
+*.jpeg
+*.bmp
+*.gif
+*.tiff
