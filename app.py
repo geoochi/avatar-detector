@@ -35,6 +35,7 @@ def detect_avatar():
         if not os.path.exists(output_path):
             return {'error': 'Processing failed'}, 500
 
+        print(f"output_path: {output_path}")
         # 返回处理后的图片
         return send_file(output_path, mimetype='image/jpeg')
 
